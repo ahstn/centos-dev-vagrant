@@ -2,11 +2,16 @@
   "name": "vagrant",
   "chef_type": "role",
   "json_class": "Chef::Role",
-  "description": "Vagrant role for provision a dev VM",
-  "override_attributes": {},
+  "description": "Vagrant role for provisioning a dev VM",
+  "override_attributes": {
+    "dev_tools": {
+      "vm_type": "headless"
+    }
+  },
   "default_attributes": {},
   "run_list": [
     "recipe[adam-vagrant::yum_repos]",
-    "recipe[adam-vagrant::dev_tools]"
+    "recipe[adam-vagrant::dev_tools]",
+    "recipe[adam-vagrant::dev_adam]"
   ]
 }
