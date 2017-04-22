@@ -1,0 +1,21 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.2
+
+suites:
+  - name: default
+    run_list:
+      - recipe[adam-vagrant::dev_tools]
+    attributes:
+      dev_tools:
+        vm_type: 'headless'
