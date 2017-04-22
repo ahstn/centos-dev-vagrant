@@ -1,9 +1,21 @@
-# Ignore everything by default
-*
+.vagrant
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
 
-# But not these files
-!/provision
-!/.editorconfig
-!/.gitignore
-!/README.md
-!/Vagrantfile
+# Bundler
+Gemfile.lock
+bin/*
+.bundle/*
+
+# test kitchen
+.kitchen/
+.kitchen.local.yml
+
+# Chef
+Berksfile.lock
+.zero-knife.rb
+Policyfile.lock.json
