@@ -3,6 +3,10 @@
 # Recipe:: dev_chef
 #
 
-yum_package 'chefdk'
+remote_file node['dev_chef']['local_path'] do
+  source node['dev_chef']['url']
+end
+
+rpm_package node['dev_chef']['local_path']
 
 # TODO: Add custom gemrc
