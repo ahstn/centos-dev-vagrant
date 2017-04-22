@@ -1,6 +1,6 @@
 #
-# Cookbook: adam-vagrant
-# Recipe: dev_adam
+# Cookbook Name:: adam-vagrant
+# Recipe:: dev_adam
 # Install and configure my personal dev tools
 #
 

@@ -1,6 +1,6 @@
 #
-# Cookbook: adam-vagrant
-# Recipe: dev_tools
+# Cookbook Name:: adam-vagrant
+# Recipe:: dev_tools
 #
 
 if node['dev_tools']['vm_type'] == 'headed'
@@ -9,7 +9,7 @@ if node['dev_tools']['vm_type'] == 'headed'
 
   # Enable GUI on boot
   execute 'systemctl set-default graphical.target'
-  
+
   yum_package 'terminator'
   yum_package 'chromium'
 end

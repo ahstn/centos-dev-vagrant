@@ -1,6 +1,6 @@
 #
-# Cookbook: adam-vagrant
-# Recipe: yum_repos
+# Cookbook Name:: adam-vagrant
+# Recipe:: yum_repos
 #
 
 # Extra Packages for Enterprise Linux Repo
