@@ -5,6 +5,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  # TODO : Find / create a docker image with chef-omnibus installed
 
 verifier:
   name: inspec

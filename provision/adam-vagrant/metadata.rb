@@ -10,3 +10,5 @@ chef_version '>= 12.5' if respond_to?(:chef_version)
 
 supports 'redhat'
 version '0.1.0'
+
+depends 'chef-dk', '~> 3.1.0'

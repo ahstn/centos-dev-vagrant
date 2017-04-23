@@ -3,10 +3,9 @@
 # Recipe:: dev_chef
 #
 
-remote_file node['dev_chef']['local_path'] do
-  source node['dev_chef']['url']
+chef_dk 'default' do
+  global_shell_init true
+  action :install
 end
-
-rpm_package node['dev_chef']['local_path']
 
 # TODO: Add custom gemrc
