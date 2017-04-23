@@ -8,4 +8,11 @@ chef_dk 'default' do
   action :install
 end
 
+node['dev_chef']['gems'].each do |package|
+  chef_gem package do
+    compile_time false
+    action :upgrade
+  end
+end
+
 # TODO: Add custom gemrc
