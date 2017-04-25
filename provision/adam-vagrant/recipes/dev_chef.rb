@@ -3,6 +3,9 @@
 # Recipe:: dev_chef
 #
 
+# TODO: Add an attribute for user (this'll fail in kitchen runs)
+home = Dir.home('vagrant')
+
 chef_dk 'default' do
   global_shell_init true
   action :install
@@ -15,4 +18,9 @@ node['dev_chef']['gems'].each do |package|
   end
 end
 
-# TODO: Add custom gemrc
+template "#{home}/.gemrc" do
+  source 'gemrc.erb'
+  owner 'vagrant'
+  mode 0755
+  variables sources: node['dev_chef']['gem_sources']
+end

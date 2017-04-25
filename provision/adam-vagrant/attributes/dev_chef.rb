@@ -2,4 +2,5 @@ default['dev_chef']['url'] = 'https://packages.chef.io/files/stable/chefdk/1.3.4
 default['dev_chef']['local_path'] = '/tmp/chefdk.rpm'
 
 # TODO: Investigate nokogiri issue when upgrading foodcritic
+default['dev_chef']['gem_sources'] = %w(https://rubygems.org http://rubygems.org)
 default['dev_chef']['gems'] = %w(kitchen-docker rubocop inspec)
