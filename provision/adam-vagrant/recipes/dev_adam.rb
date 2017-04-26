@@ -4,21 +4,21 @@
 # Install and configure my personal dev tools
 #
 
-home = Dir.home('vagrant')
+home = Dir.home(node['vagrant']['user'])
 shell = '/usr/bin/zsh'
 
 yum_package 'zsh'
 
 remote_file "#{home}/oh-my-zsh.sh" do
   source node['oh-my-zsh']['url']
-  user 'vagrant'
+  user node['vagrant']['user']
   mode 0755
   action :create_if_missing
 end
 
 execute 'oh-my-zsh.sh' do
   command "#{shell} #{home}/oh-my-zsh.sh"
-  user 'vagrant'
+  user node['vagrant']['user']
   action :run
   environment 'HOME' => home,
               'SHELL' => shell
@@ -26,7 +26,7 @@ end
 
 template "#{home}/.zshrc" do
   source 'zshrc.erb'
-  owner 'vagrant'
+  owner node['vagrant']['user']
   action :create
   variables theme: node['oh-my-zsh']['theme'],
             plugins: node['oh-my-zsh']['plugins']
@@ -36,7 +36,7 @@ yum_package 'vim'
 
 directory "#{home}/.vim/autoload" do
   recursive true
-  owner 'vagrant'
+  owner node['vagrant']['user']
   mode 0755
 end
 

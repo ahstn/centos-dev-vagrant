@@ -6,6 +6,7 @@ driver:
 provisioner:
   name: chef_zero
   # TODO : Find / create a docker image with chef-omnibus installed
+  # https://github.com/zuazo/chef-local-docker
 
 verifier:
   name: inspec
@@ -16,9 +17,11 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[adam-vagrant::yum_repos]
-      - recipe[adam-vagrant::dev_tools]
+      #- recipe[adam-vagrant::yum_repos]
+      #- recipe[adam-vagrant::dev_tools]
       - recipe[adam-vagrant::dev_chef]
     attributes:
       dev_tools:
         vm_type: 'headless'
+      vagrant:
+        user: 'kitchen'
