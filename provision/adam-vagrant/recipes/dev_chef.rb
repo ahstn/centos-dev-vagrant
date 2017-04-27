@@ -3,8 +3,6 @@
 # Recipe:: dev_chef
 #
 
-# TODO: Add an attribute for user (this'll fail in kitchen runs)
-home = Dir.home(node['vagrant']['user'])
 
 chef_dk 'default' do
   global_shell_init true
@@ -18,9 +16,14 @@ node['dev_chef']['gems'].each do |package|
   end
 end
 
-template "#{home}/.gemrc" do
-  source 'gemrc.erb'
-  owner node['vagrant']['user']
-  mode 0755
-  variables sources: node['dev_chef']['gem_sources']
+print(node['vagrant']['user'])
+%W(#{node['vagrant']['user']} root).each do |user|
+  home = Dir.home(user)
+
+  template "#{home}/.gemrc" do
+    source 'gemrc.erb'
+    owner user
+    mode 0755
+    variables sources: node['dev_chef']['gem_sources']
+  end
 end
