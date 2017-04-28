@@ -17,11 +17,14 @@ platforms:
 suites:
   - name: default
     run_list:
-      #- recipe[adam-vagrant::yum_repos]
-      #- recipe[adam-vagrant::dev_tools]
-      - recipe[adam-vagrant::dev_chef]
+      - recipe[adam-vagrant::yum_repos]
+      - recipe[adam-vagrant::dev_tools]
+      - recipe[adam-vagrant::dev_zsh]
     attributes:
       dev_tools:
         vm_type: 'headless'
       vagrant:
         user: 'kitchen'
+      oh-my-zsh:
+        theme: 'pure'
+        plugins: ['git', 'sudo']
