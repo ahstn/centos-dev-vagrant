@@ -1,9 +1,10 @@
 #
 # Cookbook Name:: adam-vagrant
-# Recipe:: dev_atom
+# Recipe:: atom
 # Install and configure atom.io for Chef development
 #
 
+# TODO: Need tests for this recipe
 yum_repository 'mosquito-atom' do
   description 'Copr repo for Atom.io owned by mosquito'
   baseurl node['atom']['repo']['url']

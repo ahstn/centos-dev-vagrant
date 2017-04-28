@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: adam-vagrant
-# Recipe:: dev_zsh
+# Recipe:: zsh
 #
 
 home = Dir.home(node['vagrant']['user'])

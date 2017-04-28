@@ -1,7 +1,6 @@
 #
 # Cookbook Name:: adam-vagrant
-# Recipe:: dev_adam
-# Install and configure my personal dev tools
+# Recipe:: vim
 #
 
 # TODO: Tests for this recipe

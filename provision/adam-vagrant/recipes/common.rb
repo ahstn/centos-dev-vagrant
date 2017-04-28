@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: adam-vagrant
-# Recipe:: dev_tools
+# Recipe:: common
 #
 
 if node['dev_tools']['vm_type'] == 'headed'

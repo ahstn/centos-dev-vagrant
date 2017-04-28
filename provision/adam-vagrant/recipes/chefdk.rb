@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: adam-vagrant
-# Recipe:: dev_chef
+# Recipe:: chefdk
 #
 
 
