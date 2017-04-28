@@ -4,4 +4,4 @@
 #
 
 include_recipe 'adam-vagrant::yum_repos'
-include_recipe 'adam-vagrant::dev_tools'
+include_recipe 'adam-vagrant::common'

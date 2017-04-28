@@ -11,7 +11,7 @@
   "default_attributes": {},
   "run_list": [
     "recipe[adam-vagrant::yum_repos]",
-    "recipe[adam-vagrant::dev_tools]",
-    "recipe[adam-vagrant::dev_adam]"
+    "recipe[adam-vagrant::common]",
+    "recipe[adam-vagrant::zsh]"
   ]
 }

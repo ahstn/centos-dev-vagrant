@@ -18,8 +18,8 @@ suites:
   - name: default
     run_list:
       - recipe[adam-vagrant::yum_repos]
-      - recipe[adam-vagrant::dev_tools]
-      - recipe[adam-vagrant::dev_zsh]
+      - recipe[adam-vagrant::common]
+      - recipe[adam-vagrant::zsh]
     attributes:
       dev_tools:
         vm_type: 'headless'
