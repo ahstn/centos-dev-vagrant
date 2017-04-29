@@ -19,6 +19,7 @@ suites:
     run_list:
       - recipe[adam-vagrant::yum_repos]
       - recipe[adam-vagrant::common]
+      - recipe[adam-vagrant::chefdk]
       - recipe[adam-vagrant::zsh]
     attributes:
       dev_tools:
@@ -28,3 +29,6 @@ suites:
       oh-my-zsh:
         theme: 'pure'
         plugins: ['git', 'sudo']
+      git:
+        name: 'kitchen-user'
+        email: 'kitchen@chef.io'
