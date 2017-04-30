@@ -22,10 +22,9 @@ suites:
       - recipe[adam-vagrant::chefdk]
       - recipe[adam-vagrant::zsh]
     attributes:
-      dev_tools:
-        vm_type: 'headless'
       vagrant:
         user: 'kitchen'
+        vm_type: 'headless'
       oh-my-zsh:
         theme: 'pure'
         plugins: ['git', 'sudo']

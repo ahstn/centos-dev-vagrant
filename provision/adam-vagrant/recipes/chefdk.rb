@@ -3,13 +3,12 @@
 # Recipe:: chefdk
 #
 
-
 chef_dk 'default' do
   global_shell_init true
   action :install
 end
 
-node['dev_chef']['gems'].each do |package|
+node['chefdk']['gems'].each do |package|
   chef_gem package do
     compile_time false
     action :upgrade
@@ -24,6 +23,6 @@ print(node['vagrant']['user'])
     source 'gemrc.erb'
     owner user
     mode 0755
-    variables sources: node['dev_chef']['gem_sources']
+    variables sources: node['chefdk']['gem_sources']
   end
 end

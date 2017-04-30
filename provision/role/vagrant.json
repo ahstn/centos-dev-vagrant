@@ -4,7 +4,7 @@
   "json_class": "Chef::Role",
   "description": "Vagrant role for provisioning a dev VM",
   "override_attributes": {
-    "dev_tools": {
+    "vagrant": {
       "vm_type": "headless"
     }
   },

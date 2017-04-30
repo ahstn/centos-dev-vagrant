@@ -1,1 +1,0 @@
-default['vagrant']['user'] = 'vagrant'
