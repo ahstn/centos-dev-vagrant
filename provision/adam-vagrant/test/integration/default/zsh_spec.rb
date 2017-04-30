@@ -1,3 +1,7 @@
+describe package('zsh') do
+  it { should be_installed }
+end
+
 describe file('/home/kitchen/oh-my-zsh.sh') do
   its('owner') { should eq 'kitchen' }
   its('group') { should eq 'kitchen' }
