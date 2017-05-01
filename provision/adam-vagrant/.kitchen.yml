@@ -22,6 +22,7 @@ suites:
       - recipe[adam-vagrant::chefdk]
       - recipe[adam-vagrant::zsh]
       - recipe[adam-vagrant::vim]
+      - recipe[adam-vagrant::java]
     attributes:
       vagrant:
         user: 'kitchen'
