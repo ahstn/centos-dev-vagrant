@@ -7,22 +7,26 @@ include_recipe 'java'
 
 yum_package 'maven'
 
-remote_file '/tmp/intellij.tar.gz' do
-  source node['java']['intellij']['url']
-  mode 0644
-end
-
 if node['vagrant']['vm_type'] == 'headed'
-  directory node['java']['intellij']['dir'] do
+  directory node['intellij']['dir'] do
     recursive true
   end
 
-  execute 'tar --strip 1 -xf /tmp/intellij.tar.gz' do
-    cwd node['java']['intellij']['dir']
+  remote_file node['intellij']['package'] do
+    source node['intellij']['url']
+    mode 0644
+    not_if { ::File.exist? node['intellij']['package'] }
+    notifies :run, execute['unpack_intellij_package'], :immediately
+  end
+
+  execute 'unpack_intellij_package' do
+    command "tar --strip 1 -xf #{node['intellij']['package']}"
+    cwd node['intellij']['dir']
+    action :nothing
   end
 
   template '/usr/share/applications/intellij-idea.desktop' do
     source 'intellij.desktop.erb'
-    variables install_dir: node['java']['intellij']['dir']
+    variables install_dir: node['intellij']['dir']
   end
 end

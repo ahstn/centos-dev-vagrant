@@ -1,9 +1,10 @@
-default['java']['intellij']['edition'] = 'C'
-default['java']['intellij']['version'] = '2017.1'
-default['java']['intellij']['domain'] = 'https://download.jetbrains.com/idea/'
-default['java']['intellij']['dir'] = '/usr/bin/intellij'
+default['intellij']['edition'] = 'C'
+default['intellij']['version'] = '2017.1'
+default['intellij']['domain'] = 'https://download.jetbrains.com/idea/'
+default['intellij']['dir'] = '/usr/bin/intellij'
+default['intellij']['package'] = '/tmp/intellij.tar.gz'
 
-domain  = node['java']['intellij']['domain']
-edition = node['java']['intellij']['edition']
-version = node['java']['intellij']['version']
-default['java']['intellij']['url'] = "#{domain}ideaI#{edition}-#{version}.tar.gz"
+domain  = node['intellij']['domain']
+edition = node['intellij']['edition']
+version = node['intellij']['version']
+default['intellij']['url'] = "#{domain}ideaI#{edition}-#{version}.tar.gz"
