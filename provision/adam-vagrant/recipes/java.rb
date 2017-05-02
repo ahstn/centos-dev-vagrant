@@ -12,14 +12,15 @@ if node['vagrant']['vm_type'] == 'headed'
     recursive true
   end
 
-  remote_file node['intellij']['package'] do
+  remote_file 'download_intellij' do
+    path node['intellij']['package']
     source node['intellij']['url']
     mode 0644
-    not_if { ::File.exist? node['intellij']['package'] }
-    notifies :run, execute['unpack_intellij_package'], :immediately
+    action :create_if_missing
+    notifies :run, 'execute[unpack_intellij]', :immediately
   end
 
-  execute 'unpack_intellij_package' do
+  execute 'unpack_intellij' do
     command "tar --strip 1 -xf #{node['intellij']['package']}"
     cwd node['intellij']['dir']
     action :nothing
