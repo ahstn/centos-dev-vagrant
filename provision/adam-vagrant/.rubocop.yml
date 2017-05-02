@@ -3,5 +3,8 @@ Metrics/LineLength:
   Exclude:
     - 'metadata.rb'
 
+Metrics/BlockLength:
+  Max: 60
+
 Style/NumericLiteralPrefix:
   EnforcedOctalStyle: zero_only
