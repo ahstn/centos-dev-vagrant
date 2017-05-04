@@ -9,7 +9,13 @@ describe 'adam-vagrant::common' do
       end.converge(described_recipe)
     end
 
-    # TODO: yum group "GNOME Desktop"
+    it 'executes expected command to install GNOME 3' do
+      expect(chef_run).to run_execute('yum group install -y "GNOME Desktop"')
+    end
+
+    it 'executes expected command to enable GUI at boot' do
+      expect(chef_run).to run_execute('systemctl set-default graphical.target')
+    end
 
     it 'installs expected yum package for terminator' do
       expect(chef_run).to install_yum_package('terminator')

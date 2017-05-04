@@ -3,7 +3,6 @@
 # Recipe:: vim
 #
 
-# TODO: Tests for this recipe
 yum_package 'vim-enhanced'
 
 directory "#{node['vagrant']['home']}/.vim/autoload" do
