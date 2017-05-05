@@ -6,7 +6,7 @@ For more information on the cookbook view the README.md
 
 ## Requirements
 * Virtualbox
-* Vagrant
+* Vagrant (with vagrant-berkshelf and vagrant-vbguest plugins)
 
 ## Installation
 ```bash
