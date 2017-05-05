@@ -24,6 +24,13 @@ if node['vagrant']['vm_type'] == 'headed'
     command "tar --strip 1 -xf #{node['intellij']['package']}"
     cwd node['intellij']['dir']
     action :nothing
+    notifies :run, 'execute[symlink_intellij_binary]', :immediately
+  end
+
+  execute 'symlink_intellij_binary' do
+    command "ln -s /bin/idea.sh #{node['intellij']['path']}"
+    cwd node['intellij']['dir']
+    action :nothing
   end
 
   template '/usr/share/applications/intellij-idea.desktop' do

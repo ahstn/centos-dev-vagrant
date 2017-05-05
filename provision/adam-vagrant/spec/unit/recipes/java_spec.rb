@@ -18,7 +18,7 @@ describe 'adam-vagrant::java' do
 
   context 'install intellij' do
     it 'creates the install folder' do
-      expect(chef_run).to create_directory('/usr/bin/intellij')
+      expect(chef_run).to create_directory('/opt/intellij-idea')
     end
 
     it 'downloads the install package if missing' do
@@ -31,11 +31,15 @@ describe 'adam-vagrant::java' do
       expect(chef_run.execute('unpack_intellij')).to do_nothing
     end
 
+    it 'does not symlink the sublime binary by default' do
+      expect(chef_run.execute('symlink_intellij_binary')).to do_nothing
+    end
+
     it 'renders intellij.desktop template file' do
       desktop_file = '/usr/share/applications/intellij-idea.desktop'
       expect(chef_run).to render_file(desktop_file).with_content { |content|
-        expect(content).to include('Exec=/usr/bin/intellij/bin/idea.sh')
-        expect(content).to include('Icon=/usr/bin/intellij/bin/idea.png')
+        expect(content).to include('Exec=/opt/intellij-idea/bin/idea.sh')
+        expect(content).to include('Icon=/opt/intellij-idea/bin/idea.png')
       }
     end
   end
