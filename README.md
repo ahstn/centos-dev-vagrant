@@ -6,7 +6,7 @@ For more information on the cookbook view the README.md
 
 ## Requirements
 * Virtualbox
-* Vagrant (with vagrant-berkshelf and vagrant-vbguest plugins)
+* Vagrant
 
 ## Installation
 ```bash
@@ -14,6 +14,8 @@ git clone https://github.com/phazyy/centos-dev-vagrant.git
 cd centos-dev-vagrant
 vagrant up
 ```
+*NB:* `vagrant up` should also install the required vagrant plugins 
+(see Vagrantfile for more info).
 
 ## Usage
 By default the cookbook will only setup common dev tools like git, mlocate, 
