@@ -5,7 +5,7 @@
   "description": "Vagrant role for provisioning a dev VM",
   "override_attributes": {
     "vagrant": {
-      "vm_type": "headless"
+      "vm_type": "headed"
     }
   },
   "default_attributes": {},
