@@ -27,7 +27,7 @@ To enable extra provisioning simply add the recipes you want to the role located
 (A list of recipes can be found [here](provision/adam-vagrant/README.md)).
 
 For example, to setup an environment for Java development with ZSH installed, 
-the role would be the following:
+the role include be the following:
 ```json
 "run_list": [
     "recipe[adam-vagrant::yum_repos]",
@@ -36,3 +36,20 @@ the role would be the following:
     "recipe[adam-vagrant::zsh]"
   ]
 ```
+
+The role can also be used to override the attributes used when provisoning.
+(A list of attributes can be found [here](provision/adam-vagrant/README.md)).
+
+For example, to setup a headless VM with a custom URL for vim-plug, the role
+would include the following:
+```json
+"override_attributes": {
+  "vagrant": {
+    "vm_type": "headless"
+  },
+  "vim-plug": {
+    "url": "http://repo.company.com/plug.vim"
+  }
+}
+```
+
