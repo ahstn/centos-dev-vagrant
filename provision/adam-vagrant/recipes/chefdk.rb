@@ -22,6 +22,7 @@ print(node['vagrant']['user'])
   template "#{home}/.gemrc" do
     source 'gemrc.erb'
     owner user
+    group user
     mode 0755
     variables sources: node['chefdk']['gem_sources']
   end

@@ -20,8 +20,8 @@ describe 'adam-vagrant::chefdk' do
   it 'renders the gemrc template for vagrant and root' do
     %w(/home/adam/.gemrc /root/.gemrc).each do |file|
       expect(chef_run).to render_file(file).with_content { |content|
-       expect(content).to include('- https://rubygems.org')
-       expect(content).to include('- http://rubygems.org')
+        expect(content).to include('- https://rubygems.org')
+        expect(content).to include('- http://rubygems.org')
       }
     end
   end

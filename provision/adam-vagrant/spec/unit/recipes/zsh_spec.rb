@@ -25,7 +25,7 @@ describe 'adam-vagrant::zsh' do
       group: 'adam',
       variables: {
         theme: 'robbyrussell',
-        plugins: ['git', 'knife', 'sudo', 'systemd']
+        plugins: %w(git knife sudo systemd)
       }
     )
   end
