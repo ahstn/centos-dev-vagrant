@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-%w(vagrant-berkshelf vagrant-vbguest).each do |plugin|
-    exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(" ")}" unless Vagrant.has_plugin? plugin
-end
+#%w(vagrant-berkshelf vagrant-vbguest).each do |plugin|
+#  exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(" ")}" unless Vagrant.has_plugin? plugin
+#end
 
 Vagrant.configure("2") do |config|
   # Plugins
