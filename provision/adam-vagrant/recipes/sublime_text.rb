@@ -39,4 +39,20 @@ if node['vagrant']['vm_type'] == 'headed'
     group 'root'
     mode 0644
   end
+
+  directory node['sublime']['pc']['dir'] do
+    recursive true
+    user node['vagrant']['user']
+    group node['vagrant']['user']
+    mode 0755
+  end
+
+  remote_file 'install_package_control' do
+    path node['sublime']['pc']['path']
+    source node['sublime']['pc']['url']
+    user node['vagrant']['user']
+    group node['vagrant']['user']
+    mode 0755
+    action :create_if_missing
+  end
 end

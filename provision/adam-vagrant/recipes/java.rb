@@ -7,6 +7,7 @@ include_recipe 'java'
 
 yum_package 'maven'
 
+# TODO: Look into Chef::Config[:file_cache_path]
 if node['vagrant']['vm_type'] == 'headed'
   directory node['intellij']['dir'] do
     recursive true

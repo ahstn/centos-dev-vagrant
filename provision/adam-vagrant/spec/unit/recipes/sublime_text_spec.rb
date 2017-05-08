@@ -28,13 +28,17 @@ describe 'adam-vagrant::sublime_text' do
       expect(chef_run.execute('symlink_sublime_binary')).to do_nothing
     end
 
-    it 'renders intellij.desktop template file' do
+    it 'renders sublime.desktop template file' do
       desktop_file = '/usr/share/applications/sublime-text-3.desktop'
       dir = '/opt/sublime_text_3'
       expect(chef_run).to render_file(desktop_file).with_content { |content|
         expect(content).to include("Exec=#{dir}/sublime_text")
         expect(content).to include("Icon=#{dir}/Icon/128x128/sublime-text.png")
       }
+    end
+
+    it 'downloads package control if missing' do
+      expect(chef_run).to create_remote_file_if_missing('install_package_control')
     end
   end
 end

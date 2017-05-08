@@ -23,10 +23,11 @@ suites:
       - recipe[adam-vagrant::zsh]
       - recipe[adam-vagrant::vim]
       - recipe[adam-vagrant::java]
+      - recipe[adam-vagrant::sublime_text]
     attributes:
       vagrant:
         user: 'kitchen'
-        vm_type: 'headless'
+        vm_type: 'headed'
       oh-my-zsh:
         theme: 'pure'
         plugins: ['git', 'sudo']
