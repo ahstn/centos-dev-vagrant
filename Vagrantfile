@@ -9,7 +9,9 @@ Vagrant.configure("2") do |config|
   # Plugins
   config.vbguest.auto_update = true
   config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = "provision/adam-vagrant/Berksfile"
+
+  # https://www.vagrantup.com/docs/synced-folders/basic_usage.html
+  #config.berkshelf.berksfile_path = "provision/adam-vagrant/Berksfile"
   
   config.vm.box = "centos/7"
   config.vm.hostname = "texas"

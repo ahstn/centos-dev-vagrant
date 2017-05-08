@@ -7,11 +7,13 @@ For more information on the cookbook view the README.md
 ## Requirements
 * Virtualbox
 * Vagrant
+* Berkshelf (via ChefDK or RubyGem)
 
 ## Installation
 ```bash
 git clone https://github.com/phazyy/centos-dev-vagrant.git
 cd centos-dev-vagrant
+vagrant plugin install vagrant-berkshelf vagrant-vbguest
 vagrant up
 ```
 *NB:* `vagrant up` should also install the required vagrant plugins 
