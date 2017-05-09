@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'adam-vagrant::chefdk' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new do |node|
-      node.override['vagrant']['user'] = 'adam'
+      node.override['vagrant']['user'] = ENV['USER'] || ENV['USERNAME']
     end.converge(described_recipe)
   end
 
