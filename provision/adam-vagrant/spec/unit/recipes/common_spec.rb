@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# TODO: Dynamic way to grab user running specs
 describe 'adam-vagrant::common' do
   describe 'override run with headed vm_type' do
     let(:chef_run) do
