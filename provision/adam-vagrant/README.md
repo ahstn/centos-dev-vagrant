@@ -15,7 +15,7 @@ Chef cookbook for provisioning a Centos development vagrant box.
 | `common.rb`       | Installs common developer tools and GNOME 3 (depending on `['vagrant']['vm_type']`) |
 | `chefdk.rb`       | Installs ChefDK, configures gem sources and installs specified ruby gems            |
 | `java.rb`         | Installs JDK, Maven and Intellij                                                    |
-| `sublime_text.rb` | Installs Sublime Text 3                                                             |
+| `sublime_text.rb` | Installs Sublime Text 3 and [Package Control]                                       |
 | `vim.rb`          | Installs Vim, Vim-Plug (Plugin Manager) and a .vimrc with some sensible defaults    |
 | `yum_repos.rb`    | Installs Yum-Repos for extra packages                                               |
 | `zsh.rb`          | Installs ZSH, oh-my-zsh and enables specified plugins                               |
@@ -48,6 +48,8 @@ Node attributes for this cookbook are logically separated into different files.
  - `['sublime']['dir']`        - Directory to unpack ST3 to
  - `['sublime']['path']`       - Path to symlink ST3 binary to
  - `['sublime']['archive']`    - Temporary path to store the ST3 archive/package
+ - `['sublime']['pc']['dir']`  - ST3 installed packages directory
+ - `['sublime']['pc']['path']` - Path to Package Control plugin
 
 **`['vim-plug']` namespace**
  - `['vim-plug']['url']`       - Full URL pointing to vim-plug's install script
@@ -63,6 +65,7 @@ kitchen commands can be found [here](https://docs.chef.io/ctl_kitchen.html).
 
 [`java`]: https://github.com/agileorbit-cookbooks/java
 [`chefdk`]: https://github.com/RoboticCheese/chef-dk-chef
+[Package Control]: https://PackageControl.io
 [ChefSpec]: https://github.com/sethvargo/chefspec
 [InSpec]: https://github.com/chef/inspec
 [kitchen-docker]: https://github.com/test-kitchen/kitchen-docker
