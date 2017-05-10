@@ -1,8 +1,13 @@
-# centos-dev-vagrant
-A vagrant box designed to create a modular development environment.
+<img src="http://i.imgur.com/Nvycw2C.png" align="left" width="128px" height="128px"/>
+
+### **centos-dev-vagrant**
+> *A vagrant box designed to create a modular development environment.*
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 Uses a Chef cookbook for provisioning.
-For more information on the cookbook view the README.md
+For more information on the cookbook view the [README.md](provision/adam-vagrant/README.md).
 
 ## Requirements
 * Virtualbox
