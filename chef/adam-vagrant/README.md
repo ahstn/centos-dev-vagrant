@@ -32,6 +32,10 @@ Node attributes for this cookbook are logically separated into different files.
  - `['chefdk']['gem_sources']` - Array of sources to use for fetching gems
  - `['chefdk']['gems']`        - Array of gems to install for chefdk
 
+**`['git']` namespace**
+ - `['git']['name']`           - Name to use for global git config
+ - `['git']['email']`          - Email to use for global git config
+
 **`['intellij']` namespace**
  - `['intellij']['version']`   - Version of Intellij to download
  - `['intellij']['edition']`   - Edition of Intellij to download (U = Ultimate, C = Community)
@@ -48,6 +52,7 @@ Node attributes for this cookbook are logically separated into different files.
  - `['sublime']['dir']`        - Directory to unpack ST3 to
  - `['sublime']['path']`       - Path to symlink ST3 binary to
  - `['sublime']['archive']`    - Temporary path to store the ST3 archive/package
+ - `['sublime']['pc']['url']`  - URL to use when downloading Package Control
  - `['sublime']['pc']['dir']`  - ST3 installed packages directory
  - `['sublime']['pc']['path']` - Path to Package Control plugin
 
