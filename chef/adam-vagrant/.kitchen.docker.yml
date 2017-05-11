@@ -1,26 +1,18 @@
+---
 driver:
-  name: dokken
-  privileged: true # because Docker and SystemD/Upstart
-  chef_image: chef/chef
-  chef_version: current
-
-transport:
-  name: dokken
+  name: docker
+  use_sudo: false
 
 provisioner:
-  name: dokken
+  name: chef_zero
+  # TODO : Find / create a docker image with chef-omnibus installed
+  # https://github.com/zuazo/chef-local-docker
 
 verifier:
   name: inspec
 
 platforms:
-- name: centos-7
-  driver:
-    image: centos:7
-    platform: rhel
-    pid_one_command: /usr/lib/systemd/systemd
-    intermediate_instructions:
-      - RUN yum -y install lsof which systemd-sysv initscripts wget net-tools
+  - name: centos-7.2
 
 suites:
   - name: default
@@ -29,9 +21,12 @@ suites:
       - recipe[adam-vagrant::common]
       - recipe[adam-vagrant::chefdk]
       - recipe[adam-vagrant::zsh]
+      - recipe[adam-vagrant::vim]
+      - recipe[adam-vagrant::java]
+      - recipe[adam-vagrant::sublime_text]
     attributes:
       vagrant:
-        user: 'root'
+        user: 'kitchen'
         vm_type: 'headed'
       oh-my-zsh:
         theme: 'pure'
