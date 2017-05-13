@@ -26,6 +26,7 @@ if node['vagrant']['vm_type'] == 'headed'
     notifies :run, 'execute[symlink_sublime_binary]', :immediately
   end
 
+  # TODO : Symlink source doesn't include full path (/opt/sublime_text_3/)
   execute 'symlink_sublime_binary' do
     command "ln -s sublime_text #{node['sublime']['path']}"
     cwd node['sublime']['dir']

@@ -3,7 +3,7 @@
 
 Chef cookbook for provisioning a Centos development vagrant box.
 
-[//]: # (TODO: Update recipes and attributes)
+[//]: # (TODO: Add recipe for installing docker)
 
 ## Dependency Cookbooks
   - [`java`] for installing the JDK
