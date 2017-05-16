@@ -12,4 +12,5 @@ supports 'redhat'
 version '0.1.0'
 
 depends 'java'
+depends 'docker'
 depends 'chef-dk', '~> 3.1.0'

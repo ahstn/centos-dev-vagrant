@@ -3,6 +3,9 @@
 # Recipe:: chefdk
 #
 
+# TODO: Install docker if gem_sources contains kitchen-docker / kitchen-dokken
+#       (when it works)
+
 chef_dk 'default' do
   global_shell_init true
   action :install
