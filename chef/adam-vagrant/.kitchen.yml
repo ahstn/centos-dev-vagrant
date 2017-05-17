@@ -25,7 +25,8 @@ suites:
       - recipe[adam-vagrant::yum_repos]
       - recipe[adam-vagrant::common]
       - recipe[adam-vagrant::chefdk]
-      # - recipe[adam-vagrant::docker]
+      - recipe[selinux::disabled]  # For installing docker in a container
+      - recipe[adam-vagrant::docker]
       - recipe[adam-vagrant::zsh]
       - recipe[adam-vagrant::vim]
       - recipe[adam-vagrant::java]
