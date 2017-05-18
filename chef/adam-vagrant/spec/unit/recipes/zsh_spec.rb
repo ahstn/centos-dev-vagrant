@@ -11,6 +11,10 @@ describe 'adam-vagrant::zsh' do
     expect(chef_run).to install_yum_package('zsh')
   end
 
+    it 'downloads oh-my-zsh isntall script if missing' do
+      expect(chef_run).to create_remote_file_if_missing('oh-my-zsh.sh')
+    end
+
   it 'executes oh-my-zsh install script as expected' do
     expect(chef_run).to run_execute('oh-my-zsh.sh').with(
       command: '/usr/bin/zsh /home/adam/oh-my-zsh.sh',

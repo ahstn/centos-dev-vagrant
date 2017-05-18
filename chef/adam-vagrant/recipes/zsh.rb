@@ -7,8 +7,9 @@ shell = '/usr/bin/zsh'
 
 yum_package 'zsh'
 
-remote_file "#{node['vagrant']['home']}/oh-my-zsh.sh" do
+remote_file 'oh-my-zsh.sh' do
   source node['oh-my-zsh']['url']
+  path "#{node['vagrant']['home']}/oh-my-zsh.sh"
   owner node['vagrant']['user']
   group node['vagrant']['user']
   mode 0644

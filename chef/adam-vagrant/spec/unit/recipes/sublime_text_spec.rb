@@ -37,6 +37,11 @@ describe 'adam-vagrant::sublime_text' do
       }
     end
 
+    it 'creates the sublime text packages folder' do
+      dir = chef_run.node['sublime']['pc']['dir']
+      expect(chef_run).to create_directory(dir)
+    end
+
     it 'downloads package control if missing' do
       expect(chef_run).to create_remote_file_if_missing('install_package_control')
     end
