@@ -8,6 +8,17 @@ describe 'adam-vagrant::chefdk' do
     end.converge(described_recipe)
   end
 
+  it 'includes docker recipe if gems include kitchen-docker' do
+    expect(chef_run).to include_recipe('adam-vagrant::docker')
+  end
+
+  it 'skips the docker recipe if gems do not include kitchen-docker' do
+    chef_run.node.normal['chefdk']['gems'] = %w(rubocop inspec)
+    chef_run.converge(described_recipe)
+
+    expect(chef_run).to_not include_recipe('adam-vagrant::docker')
+  end
+
   it 'executes the chefdk custom resouce as expected' do
     expect(chef_run).to install_chef_dk('default')
   end

@@ -3,8 +3,9 @@
 # Recipe:: chefdk
 #
 
-# TODO: Install docker if gem_sources contains kitchen-docker / kitchen-dokken
-#       (when it works)
+if (node['chefdk']['gems'] & %w(kitchen-docker kitchen-dokken)).any?
+  include_recipe 'adam-vagrant::docker'
+end
 
 chef_dk 'default' do
   global_shell_init true
