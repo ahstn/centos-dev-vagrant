@@ -1,4 +1,4 @@
-install_dir='/opt/intellij-idea'
+install_dir = '/opt/intellij-idea'
 
 describe package('java-1.8.0-openjdk') do
   it { should be_installed }

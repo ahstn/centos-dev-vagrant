@@ -43,7 +43,8 @@ describe 'adam-vagrant::sublime_text' do
     end
 
     it 'downloads package control if missing' do
-      expect(chef_run).to create_remote_file_if_missing('install_package_control')
+      resource = 'install_package_control'
+      expect(chef_run).to create_remote_file_if_missing(resource)
     end
   end
 end

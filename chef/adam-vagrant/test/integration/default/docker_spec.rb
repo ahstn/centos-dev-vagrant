@@ -4,7 +4,7 @@ describe file('usr/lib/systemd/system/docker.service') do
   its('owner') { should eq 'root' }
 end
 
-describe package('docker-engine')
+describe package('docker-engine') do
   it { should be_installed }
 end
 
