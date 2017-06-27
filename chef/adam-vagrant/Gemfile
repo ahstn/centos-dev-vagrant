@@ -1,0 +1,19 @@
+source 'https://rubygems.org'
+
+# resolve nokogiri updates for chefdk, although it may force chefdk now
+# https://github.com/chef/chef-dk/issues/278#issuecomment-89251860
+ENV['PKG_CONFIG_PATH'] = '/opt/chefdk/embedded/lib/pkgconfig'
+
+gem 'berkshelf', '~> 5.1', '>= 5.1.0'
+
+group :unit do
+  gem 'rubocop', '>= 0.49.1'
+  gem 'chefspec'
+  gem 'foodcritic'
+end
+
+group :integration do
+  gem 'test-kitchen', '>= 1.15'
+  gem 'kitchen-dokken', '>= 2.5'
+  gem 'kitchen-inspec'
+end
