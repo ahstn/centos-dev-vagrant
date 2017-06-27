@@ -1,9 +1,4 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-#%w(vagrant-berkshelf vagrant-vbguest).each do |plugin|
-#  exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(" ")}" unless Vagrant.has_plugin? plugin
-#end
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 
 Vagrant.configure("2") do |config|
   # Plugins
@@ -12,17 +7,18 @@ Vagrant.configure("2") do |config|
   config.berkshelf.berksfile_path = "chef/adam-vagrant/Berksfile"
 
   config.vm.box = "centos/7"
-  config.vm.hostname = "texas"
+  config.vm.hostname = "centos"
 
   # https://www.vagrantup.com/docs/synced-folders/basic_usage.html
-  #config.vm.synced_folder "~/git", "/git"
+  # config.vm.synced_folder "~/git", "/git"
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
     vb.memory = "1024"
   end
 
-  config.vm.chef :chef_solo do |chef|
+  config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "chef"
     chef.roles_path = "chef/role"
     chef.add_role("vagrant")
