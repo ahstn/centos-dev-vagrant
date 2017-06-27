@@ -18,7 +18,10 @@ describe 'adam-vagrant::java' do
 
   context 'install intellij' do
     it 'creates the install folder' do
-      expect(chef_run).to create_directory('/opt/intellij-idea')
+      expect(chef_run).to create_directory('/opt/intellij-idea').with(
+        owner: 'root',
+        group: 'root'
+      )
     end
 
     it 'downloads the install package if missing' do

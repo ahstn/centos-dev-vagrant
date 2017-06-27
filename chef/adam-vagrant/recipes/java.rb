@@ -11,6 +11,8 @@ yum_package 'maven'
 if node['vagrant']['vm_type'] == 'headed'
   directory node['intellij']['dir'] do
     recursive true
+    user 'root'
+    group 'root'
   end
 
   remote_file 'download_intellij' do
