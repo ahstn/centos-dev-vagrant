@@ -1,0 +1,12 @@
+[submodule "chef/adam-vagrant/vendor/docker"]
+	path = chef/adam-vagrant/vendor/docker
+	url = https://github.com/chef-cookbooks/docker
+[submodule "chef/adam-vagrant/vendor/chef-dk-chef"]
+	path = chef/adam-vagrant/vendor/chef-dk-chef
+	url = https://github.com/RoboticCheese/chef-dk-chef
+[submodule "chef/adam-vagrant/vendor/selinux"]
+	path = chef/adam-vagrant/vendor/selinux
+	url = https://github.com/chef-cookbooks/selinux
+[submodule "chef/adam-vagrant/vendor/java"]
+	path = chef/adam-vagrant/vendor/java
+	url = https://github.com/agileorbit-cookbooks/java
