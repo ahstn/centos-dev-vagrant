@@ -1,10 +1,9 @@
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 
 Vagrant.configure("2") do |config|
-  # Plugins
-  config.vbguest.auto_update = true
-  config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = "chef/adam-vagrant/Berksfile"
+  if Vagrant.has_plugin?('vagrant-vbguest')
+    config.vbguest.auto_update = true
+  end
 
   config.vm.box = "centos/7"
   config.vm.hostname = "centos"
@@ -15,11 +14,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "1024"
+    vb.customize ["modifyvm", :id, "--cpuexecutioncap", "70"]
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+    vb.customize ["modifyvm", :id, "--rtcuseutc", "on"]
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "chef"
+    chef.cookbooks_path = ["chef", "chef/adam-vagrant/vendor"]
     chef.roles_path = "chef/role"
     chef.add_role("vagrant")
   end
