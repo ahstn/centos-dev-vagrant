@@ -7,13 +7,13 @@ ENV['PKG_CONFIG_PATH'] = '/opt/chefdk/embedded/lib/pkgconfig'
 gem 'berkshelf', '~> 5.1', '>= 5.1.0'
 
 group :unit do
-  gem 'rubocop', '>= 0.49.1'
   gem 'chefspec'
   gem 'foodcritic'
+  gem 'rubocop', '>= 0.49.1'
 end
 
 group :integration do
-  gem 'test-kitchen', '>= 1.15'
   gem 'kitchen-dokken', '>= 2.5'
   gem 'kitchen-inspec'
+  gem 'test-kitchen', '>= 1.15'
 end

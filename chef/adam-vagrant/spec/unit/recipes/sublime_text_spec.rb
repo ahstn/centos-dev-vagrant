@@ -39,7 +39,6 @@ describe 'adam-vagrant::sublime_text' do
         expect(content).to include("Icon=#{dir}/Icon/128x128/sublime-text.png")
       }
     end
-
   end
 
   context 'install package control' do
