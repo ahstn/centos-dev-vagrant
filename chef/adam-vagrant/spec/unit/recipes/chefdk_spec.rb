@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'matchers_helper'
 
 describe 'adam-vagrant::chefdk' do
   let(:chef_run) do
