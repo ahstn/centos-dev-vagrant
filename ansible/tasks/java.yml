@@ -1,0 +1,18 @@
+---
+
+- name: Download Oracle JDK RPM
+  get_url:
+    url: "{{ oracle_jdk_rpm }}"
+    dest: /tmp/jdk.rpm
+    headers: 'Cookie: oraclelicense=accept-securebackup-cookie'
+
+- name: Install Oracle JDK RPM
+  yum:
+    name: /tmp/jdk.rpm
+    state: present
+
+- name: Create environment file for JAVA_HOME
+  template:
+    src: java.sh
+    dest: /etc/profile.d
+    mode: 0600
