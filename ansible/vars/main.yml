@@ -3,3 +3,5 @@
 docker_install_script: "https://get.docker.com"
 
 oracle_jdk_rpm: "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm"
+
+omz_install_script: "http://install.ohmyz.sh"

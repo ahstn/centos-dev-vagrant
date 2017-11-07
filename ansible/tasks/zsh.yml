@@ -1,11 +1,15 @@
 ---
 
+- name: Install dependencies
+  yum:
+    name: git
+    state: present
+
 - name: Install zsh package
   yum:
     name: zsh
     state: present
 
-# Following needs to be ran as the vagrant user
 - name: Download oh-my-zsh install script
   get_url:
     url: "{{ omz_install_script }}"
@@ -23,4 +27,5 @@
     src: .zshrc
     dest: /home/vagrant/.zshrc
     owner: vagrant
-    mode: 644
+    group: vagrant
+    mode: 0644
