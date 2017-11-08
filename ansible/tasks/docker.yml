@@ -8,11 +8,17 @@
     - ca-certificates
     - yum-utils
 
+- stat:
+    path: /usr/bin/docker
+  register: docker
+
 - name: Download docker install script
   get_url:
     url: "{{ docker_install_script }}"
     dest: "/tmp/install-docker.sh"
     mode: 0755
+  when: not docker.stat.exists
 
 - name: Execute docker install script
   shell: "/tmp/install-docker.sh"
+  when: not docker.stat.exists
