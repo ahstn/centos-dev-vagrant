@@ -6,6 +6,7 @@
     - vars/main.yml
   tasks:
     - include: tasks/setup.yml
+    - include: tasks/javascript.yml
     - include: tasks/docker.yml
     - include: tasks/java.yml
     - include: tasks/zsh.yml
