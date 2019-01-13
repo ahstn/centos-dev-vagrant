@@ -1,0 +1,35 @@
+---
+- hosts: all
+  gather_timeout: 30
+
+  pre_tasks:
+    - name: install alt-galaxy
+      become: yes
+      unarchive:
+        src: https://github.com/gantsign/alt-galaxy/releases/download/1.4.1/alt-galaxy_linux_amd64.tar.xz
+        remote_src: yes
+        dest: /usr/local/bin
+
+    - name: add kubernetes repo
+      become: yes
+      yum_repository:
+        name: kubernetes
+        description: Kubernetes repo
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
+        gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+        gpgcheck: yes
+      register: register_repos
+
+    - name: yum update
+      become: yes
+      yum:
+        update_cache: yes
+      when: register_repos.changed
+
+      # Ansible relies on /usr/bin/python which Fedora lacks out of the box
+    - name: symlink python3
+      become: yes
+      file:
+        src: /usr/bin/python3
+        dest: /usr/bin/python
+        state: link

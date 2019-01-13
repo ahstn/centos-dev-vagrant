@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Rename to Customfile to override Vagrant configuration
+
+# VBox config which allows overriding VM resources.
+# config.vm.provider "virtualbox" do |vb|
+#   vb.memory = 8192
+#   vb.cpus = 4
+# end
+
+# Forwarded port mapping which allows access to a specific exposed service.
+# config.vm.network 'forwarded_port', guest: 80, host: 8080
+
+# Private network to allow host-only access using a specific IP.
+# config.vm.network 'private_network', ip: '192.168.33.10'
+
+# Share an additional folder to the guest VM. ($host_dir, $guest_dir)
+# config.vm.synced_folder '../data', '/vagrant_data'

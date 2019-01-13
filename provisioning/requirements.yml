@@ -1,0 +1,16 @@
+---
+- src: geerlingguy.ntp
+- src: gantsign.inotify
+- src: gantsign.keyboard
+- src: geerlingguy.git
+- src: gantsign.git_user
+- src: geerlingguy.docker
+- src: geerlingguy.kubernetes
+- src: gantsign.minikube
+- src: gantsign.helm
+- src: gantsign.kompose
+- src: gantsign.kops
+- src: gantsign.java
+- src: gantsign.maven
+- src: gantsign.golang
+- src: weareinteractive.environment

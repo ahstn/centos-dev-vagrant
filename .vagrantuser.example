@@ -1,0 +1,35 @@
+---
+# Nugrant https://github.com/maoueh/nugrant configuration file
+# Rename this file to: .vagrantuser
+
+# If you want some of your configuration to be inherited by multiple projects
+# you can also put configuration in the the following files:
+#
+# $SYSTEM/.vagrantuser
+# ~/.vagrantuser
+
+# Uncomment to skip any of the playbook tags
+# ansible:
+#   skip_tags:
+#     - gui
+#     - docker
+#     - kubernetes
+#     - java
+#     - maven
+
+# Uncomment to accept Oracle's licensing (Required to install Java)
+# java:
+#   license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+
+# proxy:
+#   enabled: true
+#   http: 'http://example.com:3128/'
+#   https: 'http://example.com:3128/'
+#   ftp: 'http://example.com:3128/'
+#   no_proxy: 'localhost,127.0.0.1'
+
+# git_user:
+#   name: Example Name
+#   email: address@example.com
+#   # Force overwrite of current config
+#   force: yes
