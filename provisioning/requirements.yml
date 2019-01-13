@@ -14,3 +14,4 @@
 - src: gantsign.maven
 - src: gantsign.golang
 - src: weareinteractive.environment
+- src: viasite-ansible.zsh

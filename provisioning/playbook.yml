@@ -25,6 +25,28 @@
           git_user_email: '{{ git_user_email | default(None) }}'
           git_user_force: '{{ git_user_force | default(False) }}'
 
+    - role: viasite-ansible.zsh
+      tags:
+        - zsh
+      zsh_aliases:
+        - alias: dsh
+          action: 'docker exec -it "$@" /bin/sh'
+        - alias: dps
+          action: 'docker ps "$@" --format {%raw%}"{{.ID}}\t{{.Status}}\t{{.Image}}\t"{%endraw%}'
+      zsh_antigen_bundles:
+        - git
+        - docker
+        - command-not-found
+        - zsh-users/zsh-autosuggestions
+        - zdharma/fast-syntax-highlighting
+        - chrissicool/zsh-256color
+        - urbainvaes/fzf-marks
+        - ytet5uy4/fzf-widgets
+        - wfxr/forgit
+      zsh_antigen_theme: robbyrussell
+      zsh_fzf_height: "30%"
+      zsh_user: vagrant
+
     - role: geerlingguy.docker
       tags:
         - docker
