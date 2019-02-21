@@ -9,48 +9,14 @@ vagrant_dir = __dir__
 Vagrant.configure(2) do |config|
   config.vm.box = 'bento/fedora-29'
 
-  # .vagrantuser - extended provisioning configuration
-  # See: https://github.com/maoueh/nugrant
-  config.user.defaults = {
-    'proxy' => {
-      'enabled' => false,
-      'http' => 'http://example.com:3128/',
-      'https' => 'http://example.com:3128/',
-      'ftp' => 'http://example.com:3128/',
-      'no_proxy' => 'localhost,127.0.0.1'
-    },
-    'ansible' => {
-      'skip_tags' => []
-    },
-    'java_license_declaration' => '',
-    'java' => {
-      'install_dir' => '/opt/java',
-      'license_declaration' => ''
-    },
-    'maven' => {
-      'install_dir' => '/opt/maven'
-    },
-    'timezone' => 'Europe/London',
-    'locales' => {
-      'default' => 'en_GB.UTF-8',
-      'present' => ['en_GB.UTF-8', 'en_US.UTF-8']
-    },
-    'keyboard' => {
-      'model' => 'pc105',
-      'layout' => 'gb',
-      'variant' => ''
-    },
-    'git_user' => {
-      'name' => nil,
-      'email' => nil,
-      'force' => false
-    }
-  }
+  # Forwarded port mapping which allows access to a specific exposed service.
+  # config.vm.network 'forwarded_port', guest: 80, host: 8080
 
-  # Fail if Java is being installed and license hasn't been accepted.
-  config.trigger.before [:up, :provision] do
-    java_license_check(config.user)
-  end
+  # Private network to allow host-only access using a specific IP.
+  # config.vm.network 'private_network', ip: '192.168.33.10'
+
+  # Share an additional folder to the guest VM. ($host_dir, $guest_dir)
+  # config.vm.synced_folder '../data', '/vagrant_data'
 
   # Update the VirtualBox Guest Additions
   config.vbguest.auto_update = true
@@ -75,6 +41,11 @@ Vagrant.configure(2) do |config|
     config.proxy.no_proxy = config.user['proxy']['no_proxy']
   end
 
+  # Fail if Java is being installed and license hasn't been accepted.
+  config.trigger.before [:up, :provision] do
+    java_license_check(config.user)
+  end
+
   # Perform preliminary setup before the main Ansible provisioning
   config.vm.provision 'ansible_local' do |ansible|
     ansible.playbook = 'provisioning/init.yml'
@@ -88,26 +59,25 @@ Vagrant.configure(2) do |config|
     ansible.galaxy_role_file = 'provisioning/requirements.yml'
 
     # Use alt-galaxy to download roles instead of ansible-galaxy.
-    # Workaround for: "[ERROR]: failed to download the file: [Errno 104] Connection reset by peer"
     ansible.galaxy_command = 'alt-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force'
 
     ansible.extra_vars = {
-      java_license_declaration: config.user.java.license_declaration,
-      java_install_dir: config.user.java.install_dir,
-      maven_install_dir: config.user.maven.install_dir,
-      timezone: config.user.timezone,
-      locales_present: config.user.locales.present,
+      java_license_declaration: config.user['java']['license_declaration'],
+      java_install_dir: config.user['java']['install_dir'],
+      maven_install_dir: config.user['maven']['install_dir'],
+      timezone: config.user['timezone']
+      locales_present: config.user['locales']['present'],
       locales_default: {
-        lang: config.user.locales['default']
+        lang: config.user['locales']['default']
       },
-      keyboard_model: config.user.keyboard.model,
-      keyboard_layout: config.user.keyboard.layout,
-      keyboard_variant: config.user.keyboard.variant,
-      git_user_name: config.user.git_user.name,
-      git_user_email: config.user.git_user.email,
-      git_user_force: config.user.git_user.force,
+      keyboard_model: config.user['keyboard']['model'],
+      keyboard_layout: config.user['keyboard']['layout'],
+      keyboard_variant: config.user['keyboard']['variant'],
+      git_user_name: config.user['git_user']['name'],
+      git_user_email: config.user['git_user']['email'],
+      git_user_force: config.user['git_user']['force'],
     }
-    ansible.skip_tags = config.user.ansible.skip_tags
+    ansible.skip_tags = config.user['ansible']['skip_tags']
     #ansible.verbose = "vvvv"
   end
 

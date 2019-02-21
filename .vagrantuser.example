@@ -1,35 +1,50 @@
----
-# Nugrant https://github.com/maoueh/nugrant configuration file
-# Rename this file to: .vagrantuser
+# -*- mode: yaml -*-
+# vi: set ft=yaml :
 
-# If you want some of your configuration to be inherited by multiple projects
-# you can also put configuration in the the following files:
-#
-# $SYSTEM/.vagrantuser
+---
+# Nugrant configuration file (https://github.com/maoueh/nugrant)
+# Rename this file to: .vagrantuser
+# This configuration can also be inherited by multiple projects if placed at:
 # ~/.vagrantuser
 
-# Uncomment to skip any of the playbook tags
-# ansible:
-#   skip_tags:
-#     - gui
-#     - docker
-#     - kubernetes
-#     - java
-#     - maven
+virtualbox:
+  name: 'development-environment'
+  gui: true
+  cpus: 2
+  vram: 64
+  accelerate3d: off
+  memory: '4096'
+  clipboard: bidirectional
+  draganddrop: bidirectional
 
-# Uncomment to accept Oracle's licensing (Required to install Java)
-# java:
-#   license_declaration: 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+# Skip certain playbook tags (Prevent provisioning unwanted functionality)
+ansible:
+  skip_tags:
+    - gui
+git_user:
+  name: ~
+  email: ~
+  force: false # Force overwrite of current config
+java:
+  install_dir: '/opt/java'
+  # Uncomment to accept Oracle's licensing (Required to install Java)
+  # license_declaration: 'I accept the "Oracle Binary Code License Agreement under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
+maven:
+  install_dir: '/opt/maven'
 
-# proxy:
-#   enabled: true
-#   http: 'http://example.com:3128/'
-#   https: 'http://example.com:3128/'
-#   ftp: 'http://example.com:3128/'
-#   no_proxy: 'localhost,127.0.0.1'
-
-# git_user:
-#   name: Example Name
-#   email: address@example.com
-#   # Force overwrite of current config
-#   force: yes
+proxy:
+  enabled: false
+  http: 'http://example.com:3128/'
+  https: 'http://example.com:3128/'
+  ftp: 'http://example.com:3128/'
+  no_proxy: 'localhost,127.0.0.1'
+timezone: 'Europe/London'
+locales:
+  default: 'en_GB.UTF-8'
+  present:
+  - 'en_GB.UTF-8'
+  - 'en_US.UTF-8'
+keyboard:
+  model: 'pc105'
+  layout: 'gb'
+  variant: ''
