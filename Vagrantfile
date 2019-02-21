@@ -1,34 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# We need Vagrant >= 2.1.0 becuse we use triggers
-Vagrant.require_version '>= 2.1.0'
+require_relative 'lib/vagrant'
 
-required_plugins = %w[vagrant-reload vagrant-persistent-storage vagrant-vbguest vagrant-proxyconf nugrant]
-plugins_to_install = required_plugins.reject { |plugin| Vagrant.has_plugin? plugin }
-unless plugins_to_install.empty?
-  puts "Installing plugins: #{plugins_to_install.join(' ')}"
-  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
-    exec "vagrant #{ARGV.join(' ')}"
-  else
-    abort 'Installation of one or more plugins has failed. Aborting.'
-  end
-end
-
+Vagrant.require_version '>= 2.1.0' # Need for triggers
 vagrant_dir = __dir__
 
 Vagrant.configure(2) do |config|
   config.vm.box = 'bento/fedora-29'
-
-  # Unsupported audio config will cause VBox provisioning to fail.
-  default_vb_audio = nil
-  default_vb_audiocontroler = 'hda'
-  if Vagrant::Util::Platform.windows?
-    default_vb_audio  = 'dsound'
-  elsif Vagrant::Util::Platform.platform =~ /darwin/
-    default_vb_audio  = 'coreaudio'
-    default_vb_audiocontroler = 'hda'
-  end
 
   # .vagrantuser - extended provisioning configuration
   # See: https://github.com/maoueh/nugrant
@@ -65,59 +44,35 @@ Vagrant.configure(2) do |config|
       'name' => nil,
       'email' => nil,
       'force' => false
-    },
-    'virtualbox' => {
-      'name' => 'development-environment',
-      'gui' => true,
-      'cpus' => 2,
-      'vram' => '64',
-      'accelerate3d' => 'off',
-      'memory' => '4096',
-      'clipboard' => 'bidirectional',
-      'draganddrop' => 'bidirectional',
-      'audio' => default_vb_audio,
-      'audiocontroller' => default_vb_audiocontroler
-    },
+    }
   }
 
   # Fail if Java is being installed and license hasn't been accepted.
   config.trigger.before [:up, :provision] do
-    if (!config.user.ansible.skip_tags.include? 'java') && config.user.java.license_declaration != 'I accept the "Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX" under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
-      abort "Aborting... to continue you must accept the Oracle Binary Code License Agreement\n(see https://github.com/gantsign/development-environment/wiki/Java-license-declaration)."
-    end
+    java_license_check(config.user)
   end
 
   # Update the VirtualBox Guest Additions
   config.vbguest.auto_update = true
 
   config.vm.provider 'virtualbox' do |vb|
-    vb.name = config.user.virtualbox.name
-    vb.gui = config.user.virtualbox.gui
-    vb.cpus = config.user.virtualbox.cpus
-    vb.memory = config.user.virtualbox.memory
+    vb.name = config.user['virtualbox']['name']
+    vb.gui = config.user['virtualbox']['gui']
+    vb.cpus = config.user['virtualbox']['cpus']
+    vb.memory = config.user['virtualbox']['memory']
 
-    vb.customize ['modifyvm', :id, '--vram', config.user.virtualbox.vram]
-    vb.customize ['modifyvm', :id, '--accelerate3d', config.user.virtualbox.accelerate3d]
-    vb.customize ['modifyvm', :id, '--clipboard', config.user.virtualbox.clipboard]
-    vb.customize ['modifyvm', :id, '--draganddrop', config.user.virtualbox.draganddrop]
-
-    unless config.user.virtualbox.audio.nil?
-      vb.customize ['modifyvm', :id, '--audio', config.user.virtualbox.audio, '--audiocontroller', config.user.virtualbox.audiocontroller]
-    end
+    vb.customize ['modifyvm', :id, '--vram', config.user['virtualbox']['vram']]
+    vb.customize ['modifyvm', :id, '--accelerate3d', config.user['virtualbox']['accelerate3d']]
+    vb.customize ['modifyvm', :id, '--clipboard', config.user['virtualbox']['clipboard']]
+    vb.customize ['modifyvm', :id, '--draganddrop', config.user['virtualbox']['draganddrop']]
   end
 
-  # Customfile - extended provider configuration
-  # See: https://www.vagrantup.com/docs/providers/
-  if File.exist?(File.join(vagrant_dir, 'Customfile'))
-    eval(IO.read(File.join(vagrant_dir, 'Customfile')), binding)
-  end
-
-  if config.user.proxy.enabled
-    config.proxy.enabled = config.user.proxy.enabled
-    config.proxy.http = config.user.proxy.http
-    config.proxy.https = config.user.proxy.https
-    config.proxy.ftp = config.user.proxy.ftp
-    config.proxy.no_proxy = config.user.proxy.no_proxy
+  if config.user['proxy']['enabled']
+    config.proxy.enabled  = config.user['proxy']['enabled']
+    config.proxy.http     = config.user['proxy']['http']
+    config.proxy.https    = config.user['proxy']['https']
+    config.proxy.ftp      = config.user['proxy']['ftp']
+    config.proxy.no_proxy = config.user['proxy']['no_proxy']
   end
 
   # Perform preliminary setup before the main Ansible provisioning
