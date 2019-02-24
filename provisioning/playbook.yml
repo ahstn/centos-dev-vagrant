@@ -90,7 +90,7 @@
       java_fact_group_name: java_8
       java_install_dir: '{{ java_install_dir }}'
       java_is_default_installation: no
-      java_version: 8u192
+      java_version: '8'
 
     - role: gantsign.maven
       tags:

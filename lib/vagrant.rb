@@ -14,12 +14,22 @@ def configure_virtualbox_audio()
   return audio, audiocontroller
 end
 
+# Check that the config file `.vagrantuser` exists.
+def config_existance_check(path)
+  unless File.exist? path
+    raise_message 'Config file `.vagrantuser` not found, have you created it?'\
+      "\nFor more information see the #Getting-Started section in the README.md"
+  end
+end
+
 # Check for Orcacle license acceptance, otherwise abort.
 def java_license_check(config)
   agreement = 'I accept the "Oracle Binary Code License Agreement under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
-  if (!config['ansible']['skip_tags'].include? 'java') && config['java']['license_declaration'] != agreement
+  unless config['ansible']['skip_tags'].include? 'java'
+    if config['java']['license_declaration'] != agreement
       raise_message 'Aborting... to continue you must accept the Oracle License Agreement'
     end
+  end
 end
 
 # Abort and print custom error message.

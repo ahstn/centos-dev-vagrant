@@ -3,9 +3,7 @@
 
 require_relative 'lib/vagrant'
 
-Vagrant.require_version '>= 2.1.0' # Need for triggers
-vagrant_dir = __dir__
-
+Vagrant.require_version '>= 2.1.0' # Required for triggers
 Vagrant.configure(2) do |config|
   config.vm.box = 'bento/fedora-29'
 
@@ -20,6 +18,12 @@ Vagrant.configure(2) do |config|
 
   # Update the VirtualBox Guest Additions
   config.vbguest.auto_update = true
+
+  # Fail if Java is being installed and license hasn't been accepted.
+  config.trigger.before [:up, :provision] do
+    config_existance_check("#{__dir__}/.vagrantuser")
+    java_license_check(config.user)
+  end
 
   config.vm.provider 'virtualbox' do |vb|
     vb.name = config.user['virtualbox']['name']
@@ -41,11 +45,6 @@ Vagrant.configure(2) do |config|
     config.proxy.no_proxy = config.user['proxy']['no_proxy']
   end
 
-  # Fail if Java is being installed and license hasn't been accepted.
-  config.trigger.before [:up, :provision] do
-    java_license_check(config.user)
-  end
-
   # Perform preliminary setup before the main Ansible provisioning
   config.vm.provision 'ansible_local' do |ansible|
     ansible.playbook = 'provisioning/init.yml'
@@ -65,7 +64,7 @@ Vagrant.configure(2) do |config|
       java_license_declaration: config.user['java']['license_declaration'],
       java_install_dir: config.user['java']['install_dir'],
       maven_install_dir: config.user['maven']['install_dir'],
-      timezone: config.user['timezone']
+      timezone: config.user['timezone'],
       locales_present: config.user['locales']['present'],
       locales_default: {
         lang: config.user['locales']['default']
