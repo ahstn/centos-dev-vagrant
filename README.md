@@ -9,14 +9,17 @@
 # Table of Contents
 
 * [Introduction](#introduction)
-* [Configuration](#Configuration)
+* [Setup and Usage](#setup-and-usage)
+  * [Prerequisites](#prerequisites)
+  * [Building the VM](#building-the-vm)
+  * [Configuration](#configuration)
 * [Ansible Provisioning](#ansible-provisioning)
 * [Vagrant Customization](#vagrant-customization)
   * [Changing the VM Hostname](#changing-the-vm-hostname)
   * [Sharing a folder](#sharing-a-folder)
 
 
-## Introduction
+# Introduction
 Flexible VM aimed primarily at developing apps for Kubernetes, Docker deployments.
 
 This VM makes building reliable, reproducable environments quick and easy with
@@ -24,7 +27,38 @@ customization baked in from the start using [Nugrant] and [Ansible].
 While the main focus of this environment is to help developers working with Kubernetes cluster(s) day-to-day, it has
 support for most major languages including their development environments.
 
-# Configuration
+# Setup and Usage
+## Prerequisites
+Download and install [Vagrant] and [VirtualBox].
+
+Create your `.vagrantuser` config file. This is used to configure the provision
+and virtual machine. Sensible defaults are set, but if you'd rather personalise
+the environment before installing then see the [Configuration](#configuration)
+section.
+
+## Building the VM
+Now that everything is ready, starting the creation and provisioning is
+simple. Just run the following command:
+```bash
+$ vagrant up
+
+# To use a custom provider:
+$ vagrant up --provider hyperv
+```
+**NB:** If you're on Windows, you may wish to try using HyperV as the providers rather
+than VirtualBox.
+
+After the VM is built, if you want to re-provision it, you can run:
+```bash
+$ vagrant provision
+```
+
+To safely shutdown the virtual machine, you can run:
+```bash
+$ vagrant halt
+```
+
+## Configuration
 [.vagrantuser.example](./.vagrantuser.example)
 
 # Ansible Provisioning
@@ -60,6 +94,8 @@ can be found on the [shared folder documentation].
 
 [Nugrant]: https://github.com/maoueh/nugrant
 [Ansible]: https://github.com/ansible/ansible
+[Vagrant]: https://www.vagrantup.com/downloads.html
+[VirtualBox]: https://www.virtualbox.org/wiki/Downloads
 [Ansible module]: https://docs.ansible.com/ansible/latest/modules/list_of_all_modules.html
 [Ansible Galaxy]: https://galaxy.ansible.com/
 [Vagrant documentation]: https://www.vagrantup.com/docs/vagrantfile/
