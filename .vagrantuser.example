@@ -12,7 +12,7 @@ virtualbox:
   gui: true
   cpus: 2
   vram: 64
-  accelerate3d: off
+  accelerate3d: 'off'
   memory: '4096'
   clipboard: bidirectional
   draganddrop: bidirectional
