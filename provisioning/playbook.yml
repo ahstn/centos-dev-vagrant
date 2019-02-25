@@ -93,6 +93,13 @@
         - golang
       golang_gopath: '$HOME/workspace-go'
 
+    - role: geerlingguy.nodejs
+      tags:
+        - javascript
+      npm_config_unsafe_perm: 'true'
+      nodejs_npm_global_packages:
+        - yarn
+
     - role: weareinteractive.environment
       environment_config:
         CDPATH: ".:/home/vagrant/workspace:/home/vagrant/workspace-go/src/github.com/gantsign"

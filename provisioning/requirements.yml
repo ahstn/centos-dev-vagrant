@@ -13,5 +13,6 @@
 - src: gantsign.java
 - src: gantsign.maven
 - src: gantsign.golang
+- src: geerlingguy.nodejs
 - src: weareinteractive.environment
 - src: viasite-ansible.zsh
