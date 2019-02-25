@@ -26,11 +26,13 @@ git_user:
   email: ~
   force: false # Force overwrite of current config
 java:
+  version: '8'              # can be specific: '8u192'
   install_dir: '/opt/java'
   license_declaration: ''
   # Uncomment to accept Oracle's licensing (Required to install Java)
   # license_declaration: 'I accept the "Oracle Binary Code License Agreement under the terms at http://www.oracle.com/technetwork/java/javase/terms/license/index.html'
 maven:
+  version: '3.6.0'
   install_dir: '/opt/maven'
 
 proxy:

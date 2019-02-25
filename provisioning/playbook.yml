@@ -67,22 +67,10 @@
     - role: gantsign.minikube
       tags:
         - kubernetes
-        - docker
-
-    - role: gantsign.helm
-      tags:
-        - kubernetes
-        - docker
-
-    - role: gantsign.kompose
-      tags:
-        - kubernetes
-        - docker
 
     - role: gantsign.kops
       tags:
         - kubernetes
-        - docker
 
     - role: gantsign.java
       tags:
@@ -90,14 +78,14 @@
       java_fact_group_name: java_8
       java_install_dir: '{{ java_install_dir }}'
       java_is_default_installation: no
-      java_version: '8'
+      java_version: '{{ java_version }}'
 
     - role: gantsign.maven
       tags:
         - java
         - maven
       maven_install_dir: '{{ maven_install_dir }}'
-      maven_version: '3.6.0'
+      maven_version: '{{ maven_version }}'
       gather_timeout: 20
 
     - role: gantsign.golang

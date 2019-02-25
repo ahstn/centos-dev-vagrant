@@ -35,6 +35,11 @@ Create your `.vagrantuser` config file. This is used to configure the provision
 and virtual machine. Sensible defaults are set, but if you'd rather personalise
 the environment before installing then see the [Configuration](#configuration)
 section.
+```bash
+$ cp .vagrantuser.example .vagrantuser
+```
+**NB:** The file is ignored by Git, so you don't have to worry about
+committing changes or sensitive data.
 
 ## Building the VM
 Now that everything is ready, starting the creation and provisioning is

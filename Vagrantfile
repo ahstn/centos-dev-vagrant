@@ -63,7 +63,9 @@ Vagrant.configure(2) do |config|
     ansible.extra_vars = {
       java_license_declaration: config.user['java']['license_declaration'],
       java_install_dir: config.user['java']['install_dir'],
+      java_version: config.user['java']['version'],
       maven_install_dir: config.user['maven']['install_dir'],
+      maven_version: config.user['maven']['version'],
       timezone: config.user['timezone'],
       locales_present: config.user['locales']['present'],
       locales_default: {
